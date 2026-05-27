@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A little love from home 🐀</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Caveat:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      background-color: #edf7ed;
+      background-image:
+        radial-gradient(circle at 15% 25%, #d4efd4 0%, transparent 40%),
+        radial-gradient(circle at 85% 70%, #c8e8c8 0%, transparent 40%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Lora', Georgia, serif;
+      color: #0c2707;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 640px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .header-icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    h1 {
+      font-family: 'Caveat', cursive;
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: #064406;
+      margin-bottom: 0.4rem;
+      line-height: 1.2;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: #407540;
+      font-style: italic;
+      margin-bottom: 2.5rem;
+    }
+
+    .card {
+      background: #b8ddb8;
+      border: 1.5px solid #508b50;
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      margin-bottom: 2rem;
+      position: relative;
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .card::before {
+      content: '\201C';
+      font-family: 'Caveat', cursive;
+      font-size: 7rem;
+      color: #183f10;
+      position: absolute;
+      top: -1.5rem;
+      left: 1.5rem;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .photo-wrap {
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid #183f10;
+      margin-bottom: 1.25rem;
+      flex-shrink: 0;
+      display: none;
+      opacity: 0;
+      transform: scale(0.85);
+      transition: opacity 0.45s ease, transform 0.45s ease;
+      background: #dfffd9;
+    }
+
+    .photo-wrap.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .quote-text {
+      font-size: 1.25rem;
+      line-height: 1.75;
+      color: #0c2707;
+      font-style: italic;
+      margin-bottom: 1.25rem;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .quote-author {
+      font-family: 'Caveat', cursive;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #064406;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.5s ease 0.1s, transform 0.5s ease 0.1s;
+    }
+
+    .quote-text.visible,
+    .quote-author.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .placeholder {
+      color: #57b453;
+      font-style: italic;
+      font-size: 1rem;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #064406;
+      color: #b8ddb8;
+      font-family: 'Caveat', cursive;
+      font-size: 1.4rem;
+      font-weight: 700;
+      padding: 0.85rem 2.5rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+      transition: background 0.2s ease, transform 0.15s ease;
+      box-shadow: 0 4px 0 #022002;
+    }
+
+    .btn:hover {
+      background: #0d6b0d;
+    }
+
+    .btn:active {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 #022002;
+    }
+
+    .counter {
+      margin-top: 1.25rem;
+      font-size: 0.85rem;
+      color: #407540;
+      font-style: italic;
+    }
+
+    footer {
+      margin-top: 3rem;
+      color: #407540;
+      font-family: 'Caveat', cursive;
+      font-size: 1rem;
+    }
+
+    .doodle {
+      margin: 0 0.3rem;
+      opacity: 0.5;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <span class="header-icon">🐀</span>
+    <h1>A little love from home</h1>
+    <p class="subtitle">For whenever you miss home pookie bear</p>
+
+    <div class="card" id="card">
+      <div class="photo-wrap" id="photoWrap">
+        <img id="quotePhoto" src="" alt="" />
+      </div>
+      <p class="quote-text" id="quoteText">
+        <span class="placeholder">Press the button below for a message from a special someone🤩.</span>
+      </p>
+      <span class="quote-author" id="quoteAuthor"></span>
+    </div>
+
+    <button class="btn" id="quoteBtn" onclick="showQuote()">
+      Send me words of wisdom
+    </button>
+
+    <p class="counter" id="counter"></p>
+
+    <footer>
+      <span></span>
+    </footer>
+  </div>
+
+  <script>
+    const quotes = [
+      { text: "You are so brave and strong", author: "— Zoe", photo: "images/raceway.jpg" },
+      { text: "Remember you're an american", author: "— Zoe", photo: "images/niagara.jpg" },
+      { text: "Remember when you put the rat on the wall by the neck", author: "— Zoe", photo: "images/ratwall.jpg" },
+      { text: "I miss you pookie but am so proud of you", author: "— Zoe", photo: "images/couch.jpg" },
+      { text: "All you need is the rat", author: "— Zoe", photo: "images/ratpeep.jpg" },
+      { text: "You're going to be so educated", author: "— Zoe", photo: "images/ztaaescape.jpg" },
+      { text: "My pookie my pookie you're my pookie you're my pookie", author: "— Zoe", photo: "images/paddleBoard.jpg" },
+      { text: "Rats rats we are the rats", author: "— Zoe", photo: "images/ratmusic.jpg" },
+      { text: "Remember to practice your english, don't want to be forgetting that", author: "— Zoe", photo: "images/patio.jpg" },
+      { text: "Grungle fuck", author: "— Zoe", photo: "images/grungle.png" },
+      { text: "I love you", author: "— Zoe", photo: "images/cards.jpg" },
+      { text: "at least you can't vom in our sink", author: "— Tom", photo: "images/zoetomabby.jpg" },
+      { text: "can't wait for you to come back already", author: "— Tom", photo: "images/ztariver.jpg" },
+      { text: "grungle ... fuck", author: "— Tom", photo: "images/grungle.png" },
+      { text: "don't stop singing random things abruptly, its part of your charm", author: "— Tom", photo: "images/swimmeet.jpg" },
+      { text: "try not to intimidate the Spaniards with you towering presence", author: "— Tom", photo: "images/abbyandzig.jpg" },
+      { text: "maybe you'll grow taller", author: "— Zoe", photo: "images/zigandoz.jpg" },
+      { text: "cool planeride inbound", author: "— Zoe", photo: "images/plane.jpg" },
+    ];
+
+    let lastIndex = -1;
+    let shown = 0;
+
+    function showQuote() {
+      const textEl    = document.getElementById('quoteText');
+      const authorEl  = document.getElementById('quoteAuthor');
+      const photoWrap = document.getElementById('photoWrap');
+      const photoImg  = document.getElementById('quotePhoto');
+
+      textEl.classList.remove('visible');
+      authorEl.classList.remove('visible');
+      photoWrap.classList.remove('visible');
+
+      setTimeout(() => {
+        let idx;
+        do { idx = Math.floor(Math.random() * quotes.length); }
+        while (idx === lastIndex && quotes.length > 1);
+        lastIndex = idx;
+
+        const q = quotes[idx];
+        textEl.textContent = q.text;
+        authorEl.textContent = q.author;
+
+        if (q.photo) {
+          photoImg.src = q.photo;
+          photoImg.alt = q.author.replace('— ', '');
+          photoWrap.style.display = 'block';
+          setTimeout(() => photoWrap.classList.add('visible'), 20);
+        } else {
+          photoWrap.style.display = 'none';
+        }
+
+        textEl.classList.add('visible');
+        authorEl.classList.add('visible');
+
+        shown++;
+        const counter = document.getElementById('counter');
+        counter.textContent = shown === 1
+          ? "One message of love delivered 🦒"
+          : `${shown} bars of love so far 💚`;
+
+      }, 220);
+    }
+  </script>
+
+</body>
+</html>
