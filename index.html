@@ -37,7 +37,7 @@
 
     h1 {
       font-family: 'Caveat', cursive;
-      font-size: 2.4rem;
+      font-size: clamp(1.8rem, 6vw, 2.4rem);
       font-weight: 700;
       color: #064406;
       margin-bottom: 0.4rem;
@@ -45,20 +45,19 @@
     }
 
     .subtitle {
-      font-size: 1rem;
+      font-size: clamp(0.85rem, 3vw, 1rem);
       color: #407540;
       font-style: italic;
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
     }
 
     .card {
       background: #b8ddb8;
       border: 1.5px solid #508b50;
       border-radius: 20px;
-      padding: 2.5rem 2rem;
-      margin-bottom: 2rem;
+      padding: 2rem 1.5rem;
+      margin-bottom: 1.5rem;
       position: relative;
-      min-height: 200px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -79,16 +78,15 @@
     }
 
     .photo-wrap {
-      width: 500px;
-      height: 500px;
-      border-radius: 50%;
+      width: min(420px, 85vw);
+      height: min(420px, 85vw);
+      border-radius: 16px;
       overflow: hidden;
       border: 3px solid #183f10;
       margin-bottom: 1.25rem;
       flex-shrink: 0;
-      display: none;
       opacity: 0;
-      transform: scale(0.85);
+      transform: scale(0.95);
       transition: opacity 0.45s ease, transform 0.45s ease;
       background: #dfffd9;
     }
@@ -106,7 +104,7 @@
     }
 
     .quote-text {
-      font-size: 1.25rem;
+      font-size: clamp(1rem, 3.5vw, 1.2rem);
       line-height: 1.75;
       color: #0c2707;
       font-style: italic;
@@ -114,11 +112,12 @@
       opacity: 0;
       transform: translateY(12px);
       transition: opacity 0.5s ease, transform 0.5s ease;
+      white-space: pre-line;
     }
 
     .quote-author {
       font-family: 'Caveat', cursive;
-      font-size: 1.2rem;
+      font-size: clamp(1rem, 4vw, 1.2rem);
       font-weight: 700;
       color: #064406;
       opacity: 0;
@@ -132,31 +131,24 @@
       transform: translateY(0);
     }
 
-    .placeholder {
-      color: #57b453;
-      font-style: italic;
-      font-size: 1rem;
-    }
-
     .btn {
       display: inline-block;
       background: #064406;
       color: #b8ddb8;
       font-family: 'Caveat', cursive;
-      font-size: 1.4rem;
+      font-size: clamp(1.1rem, 4vw, 1.4rem);
       font-weight: 700;
-      padding: 0.85rem 2.5rem;
+      padding: 0.85rem 2rem;
       border: none;
       border-radius: 50px;
       cursor: pointer;
       letter-spacing: 0.02em;
       transition: background 0.2s ease, transform 0.15s ease;
       box-shadow: 0 4px 0 #022002;
+      width: min(320px, 90vw);
     }
 
-    .btn:hover {
-      background: #0d6b0d;
-    }
+    .btn:hover { background: #0d6b0d; }
 
     .btn:active {
       transform: translateY(3px);
@@ -176,11 +168,6 @@
       font-family: 'Caveat', cursive;
       font-size: 1rem;
     }
-
-    .doodle {
-      margin: 0 0.3rem;
-      opacity: 0.5;
-    }
   </style>
 </head>
 <body>
@@ -191,13 +178,11 @@
     <p class="subtitle">For whenever you miss home pookie bear</p>
 
     <div class="card" id="card">
-      <div class="photo-wrap" id="photoWrap">
-        <img id="quotePhoto" src="" alt="" />
+      <div class="photo-wrap visible" id="photoWrap">
+        <img id="quotePhoto" src="images/zigandoz2.jpg" alt="Welcome" />
       </div>
-      <p class="quote-text" id="quoteText">
-        <span class="placeholder">Press the button below for a message from a special someone🤩.</span>
-      </p>
-      <span class="quote-author" id="quoteAuthor"></span>
+      <p class="quote-text visible" id="quoteText">Press the button!!</p>
+      <span class="quote-author visible" id="quoteAuthor"></span>
     </div>
 
     <button class="btn" id="quoteBtn" onclick="showQuote()">
@@ -206,9 +191,7 @@
 
     <p class="counter" id="counter"></p>
 
-    <footer>
-      <span></span>
-    </footer>
+    <footer><span></span></footer>
   </div>
 
   <script>
@@ -231,6 +214,16 @@
       { text: "try not to intimidate the Spaniards with you towering presence", author: "— Tom", photo: "images/abbyandzig.jpg" },
       { text: "maybe you'll grow taller", author: "— Zoe", photo: "images/zigandoz.jpg" },
       { text: "cool planeride inbound", author: "— Zoe", photo: "images/plane.jpg" },
+      { text: "Remember - This is your world, we are all just living in it.", author: "— Nic", photo: "images/abbynichannah.jpg" },
+      { text: "Time did not exist before Abby.", author: "— Nic", photo: "images/crown.jpg" },
+      { text: "give the spanish a taste of american FREEDOM RAHH", author: "— Ethan", photo: "images/ozandgin.jpg" },
+      { text: "hacer mucho fiesta amigo", author: "— Ethan", photo: "images/coolozzie.jpg" },
+      { text: "google's #1 tip to bullfighting is \"read the bull\", glhf!", author: "— Ethan", photo: "images/abandoz.jpg" },
+      { text: "Mom's Top 5 Dos and Don'ts while studying abroad in Spain: \n1. DO: Try to say yes to new experiences. This may be your only time living out of the states, try to make the most of your cultural immersion! Try new foods and drinks and excursions. Get yourself out of your comfort zone! *But remember your mom says always be mindful of your safety and security when doing new things.", author: "— Mom", photo: "images/family.jpg", photoFit: "contain" },
+      { text: "Mom's Top 5 Dos and Don'ts while studying abroad in Spain: \n2. DON'T: Feel pressure to mirror other people's study abroad experience. Do what YOU want to do!", author: "— Mom", photo: "images/ginny.jpg" },
+      { text: "Mom's Top 5 Dos and Don'ts while studying abroad in Spain: \n3. DON'T: Fall for scams. Whether it's in Valladolid or on a trip, be very aware of common scams that you may encounter. There are many people that will try in a lot of creative ways to get your money. Be safe and stick together!", author: "— Mom", photo: "images/siblings.jpg", photoFit: "contain" },
+      { text: "Mom's Top 5 Dos and Don'ts while studying abroad in Spain: \n4. DO: Remember to be grateful and have fun! Studying abroad is such a privilege. Keep on top of your studies while abroad but don't forget that above all this experience is supposed to be fun. Make new friends, see new places, try new foods, and overall just live your life to the fullest.", author: "— Mom", photo: "images/present.jpg" },
+      { text: "Mom's Top 5 Dos and Don'ts while studying abroad in Spain: \n5. DON'T: Let your fears deter you from making the most of your study abroad experience.  You will grow so much confidence over the next few months and have some of the most magical experiences of your life. Being able to come home and tell all the stories to family and friends will be so amazing. Will it be difficult at times? Absolutely. Will you get homesick? Yes, hopefully only on a few occasions. Know the rough patches will pass and be replaced by good memories. You are strong and brave and can do anything! ❤️❤️❤️", author: "— Mom", photo: "images/abandkelly.jpg" },
     ];
 
     let lastIndex = -1;
@@ -260,6 +253,19 @@
           photoImg.src = q.photo;
           photoImg.alt = q.author.replace('— ', '');
           photoWrap.style.display = 'block';
+          if (q.photoFit === 'contain') {
+            photoWrap.style.width = 'min(420px, 85vw)';
+            photoWrap.style.height = 'auto';
+            photoImg.style.objectFit = 'contain';
+            photoImg.style.width = '100%';
+            photoImg.style.height = 'auto';
+          } else {
+            photoWrap.style.width = '';
+            photoWrap.style.height = '';
+            photoImg.style.objectFit = 'cover';
+            photoImg.style.width = '100%';
+            photoImg.style.height = '100%';
+          }
           setTimeout(() => photoWrap.classList.add('visible'), 20);
         } else {
           photoWrap.style.display = 'none';
